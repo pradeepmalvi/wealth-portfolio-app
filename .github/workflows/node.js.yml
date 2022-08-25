@@ -27,3 +27,4 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: sudo pm2 restart server.js
+    - run: cp -R /home/ubuntu/backend/_work/wealth-portfolio-app/wealth-portfolio-app/client/build /var/www
