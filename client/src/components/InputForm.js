@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import Axios from "../Axios";
 import Loader from "./Loader";
 
 export default function InputForm({ type, onClose, getSummary }) {
@@ -48,13 +48,11 @@ export default function InputForm({ type, onClose, getSummary }) {
     };
 
     try {
-      axios
-        .post(`http://localhost:5000/api/${type}/add`, data, { headers })
-        .then(res => {
-          setLoading(false);
-          getSummary();
-          onClose();
-        });
+      Axios.post(`/${type}/add`, data, { headers }).then(res => {
+        setLoading(false);
+        getSummary();
+        onClose();
+      });
     } catch (error) {
       setLoading(false);
     }

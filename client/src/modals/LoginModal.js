@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import Axios from "../Axios";
 import Modal from "react-modal";
 import Loader from "../components/Loader";
 
@@ -38,7 +38,7 @@ export default function RegisterModal({ modalIsOpen, onClose }) {
     };
 
     try {
-      axios.post(`http://localhost:5000/api/users/login`, data).then(res => {
+      Axios.post(`/users/login`, data).then(res => {
         setLoading(false);
         if (res.data.status) {
           onClose();

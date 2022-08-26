@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import Axios from "../Axios";
 import Loader from "./Loader";
 import AddIncomeModal from "../modals/AddIncomeModal";
 import AddExpenseModal from "../modals/AddExpenseModal";
@@ -39,13 +39,9 @@ export default function Section() {
       const headers = {
         Authorization: `Bearer ${user.token}`
       };
-      const { data } = await axios.post(
-        "http://localhost:5000/api/summary",
-        dates,
-        {
-          headers
-        }
-      );
+      const { data } = await Axios.post(`/summary`, dates, {
+        headers
+      });
       setData(data);
       setLoading(false);
     } catch (error) {
@@ -61,7 +57,7 @@ export default function Section() {
     };
     setLoading(true);
     try {
-      await axios.delete(`http://localhost:5000/api/${type}/delete/${id}`, {
+      await Axios.delete(`/${type}/delete/${id}`, {
         headers
       });
       setLoading(false);
