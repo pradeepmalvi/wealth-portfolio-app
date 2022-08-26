@@ -35,6 +35,10 @@ export default function Section() {
     const user = userAccess || userDetails;
     setLoading(true);
 
+    if (!user) {
+      return;
+    }
+
     try {
       const headers = {
         Authorization: `Bearer ${user.token}`
@@ -42,6 +46,7 @@ export default function Section() {
       const { data } = await Axios.post(`/summary`, dates, {
         headers
       });
+
       setData(data);
       setLoading(false);
     } catch (error) {
