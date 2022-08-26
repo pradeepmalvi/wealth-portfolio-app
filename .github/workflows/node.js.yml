@@ -25,11 +25,9 @@ jobs:
           cache: "npm"
       - run: npm ci
       - run: npm run build --if-present
-      - name: React app node_modules
-        run: npm i
+      - run: npm i
         working-directory: ./client
-      - name: React app build
-        run: npm run build
+      - run: npm run build
         working-directory: ./client
       - run: sudo pm2 restart server.js
       - run: cp -R /home/ubuntu/backend/_work/wealth-portfolio-app/wealth-portfolio-app/client/build /var/www
