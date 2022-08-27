@@ -1,8 +1,9 @@
+require("newrelic");
+
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const { connectDB } = require("./config/db");
-require("newrelic");
 
 const userRoutes = require("./routes/route");
 
