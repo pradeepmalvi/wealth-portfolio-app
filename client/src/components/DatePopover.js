@@ -1,4 +1,3 @@
-import { setDate } from "date-fns/esm";
 import React, { useState } from "react";
 import { Popover } from "react-tiny-popover";
 import DateRangePicker from "./DateRangePicker";
@@ -10,18 +9,22 @@ export default function DatePopover({
   dates,
   setIsPopoverOpen
 }) {
-  const [dateData, setDatesData] = useState({
-    startDate: new Date(new Date().getFullYear(), 0, 1),
-    endDate: new Date(new Date().getFullYear(), 11, 31)
-  });
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: null,
+      key: "selection"
+    }
+  ]);
 
   const onChangeDate = dates => {
-    setDatesData(dates[0]);
+    setState(dates);
   };
 
   const onSelect = () => {
-    const startDate = new Date(dateData.startDate);
-    const endDate = new Date(dateData.endDate);
+    const dates = state[0];
+    const startDate = new Date(dates.startDate);
+    const endDate = new Date(dates.endDate);
     const date = {
       startDate: startDate.toISOString(),
       endDate: endDate.toISOString()
@@ -36,7 +39,10 @@ export default function DatePopover({
       positions={["bottom"]} // preferred positions by priority
       content={
         <div class="block flex flex-col p-2 max-w-sm bg-white rounded-sm border border-white-200 shadow-sm">
-          <DateRangePicker onChangeDate={onChangeDate}></DateRangePicker>
+          <DateRangePicker
+            state={state}
+            onChangeDate={onChangeDate}
+          ></DateRangePicker>
           <button
             disabled={dates ? false : true}
             type="submit"

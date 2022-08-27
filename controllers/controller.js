@@ -18,11 +18,12 @@ const userRegister = async (req, res) => {
 
     res.json({
       status: true,
-      message: "User registered successfully!",
+      message: "Registered successfully!",
       data: {
         id: user._id,
         email: user.email,
-        name: user.name
+        name: user.name,
+        token: generateToken(user._id)
       }
     });
   } catch (error) {
