@@ -23,12 +23,14 @@ export default function Section() {
     if (userDetails) {
       setUserAccess(userDetails);
     }
-
-    getSummary(userDetails);
   }, []);
 
   useEffect(() => {
-    getSummary();
+    getSummary(userAccess);
+  }, [userAccess]);
+
+  useEffect(() => {
+    getSummary(userAccess, dates);
   }, [dates]);
 
   const getSummary = async userDetails => {
@@ -80,7 +82,6 @@ export default function Section() {
       startDate: startDate.toISOString(),
       endDate: endDate.toISOString()
     };
-    getSummary(userAccess, date);
     setDates(date);
   };
 
